@@ -1,0 +1,39 @@
+---
+import '@fontsource/geist-mono';
+import '@fontsource/geist-sans';
+import '@/styles/globals.css';
+import { ClientRouter } from 'astro:transitions';
+
+interface RootProps {
+	title: string;
+	description: string;
+}
+const { title, description } = Astro.props as RootProps;
+---
+
+<!doctype html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="description" content={description} />
+		<meta
+			name="viewport"
+			content="width=device-width"
+		/>
+		<link
+			rel="icon"
+			type="image/svg+xml"
+			href="/favicon.svg"	
+		/>
+		<meta name="generator" content={Astro.generator} />
+		<title>{title}</title>
+		<ClientRouter />
+	</head>
+	<body
+		class="flex h-[100vh] max-h-[100dvh] flex-col font-sans text-secondary bg-primary relative antialiased no-scrollbar"
+	>
+		<main class="flex-grow">
+			<slot />
+		</main>
+	</body>
+</html>
