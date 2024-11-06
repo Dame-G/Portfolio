@@ -3,8 +3,10 @@ import '@fontsource/geist-mono';
 import '@fontsource/geist-sans';
 import '@/styles/globals.css';
 import { ClientRouter } from 'astro:transitions';
-import Footer from '@/components/general/Footer';
-import Header from '@/components/general/Header';
+import Analytics from '@/components/general/analytics.astro';
+import Footer from '@/components/general/footer';
+import Header from '@/components/general/header';
+import ReactRoot from './reactRoot';
 
 interface RootProps {
 	title: string;
@@ -16,6 +18,7 @@ const { title, description } = Astro.props as RootProps;
 <!doctype html>
 <html lang="en">
 	<head>
+		<Analytics id="G-8TML7V54XG" />
 		<meta charset="UTF-8" />
 		<meta name="description" content={description} />
 		<meta
@@ -32,12 +35,10 @@ const { title, description } = Astro.props as RootProps;
 		<ClientRouter />
 	</head>
 	<body
-		class="flex h-[100vh] max-h-[100dvh] flex-col font-sans text-secondary bg-primary relative antialiased no-scrollbar"
+		class=" font-sans text-primary-foreground bg-primary relative antialiased no-scrollbar"
 	>
-		<Header client:load />
-		<main class="flex-grow">
+		<ReactRoot page={Astro.url.pathname} client:load>
 			<slot />
-		</main>
-		<Footer client:load />
+		</ReactRoot>
 	</body>
 </html>
